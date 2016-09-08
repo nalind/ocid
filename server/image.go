@@ -4,7 +4,9 @@ import (
 	"errors"
 
 	pb "github.com/kubernetes/kubernetes/pkg/kubelet/api/v1alpha1/runtime"
-	"github.com/nalind/image/image"
+	ic "github.com/nalind/image/copy"
+	"github.com/nalind/image/signature"
+	"github.com/nalind/image/storage"
 	"github.com/nalind/image/transports"
 	"golang.org/x/net/context"
 )
@@ -49,70 +51,29 @@ func (s *Server) PullImage(ctx context.Context, req *pb.PullImageRequest) (*pb.P
 	}
 
 	// TODO(runcom): deal with AuthConfig in req.GetAuth()
-	tr, err := transports.ParseImageName(img)
+	sr, err := transports.ParseImageName(img)
 	if err != nil {
 		return nil, err
 	}
 
-	// TODO(runcom): figure out the ImageContext story in containers/image instead of passing ("", true)
-	src, err := tr.NewImageSource(s.imageContext, nil)
-	if err != nil {
-		return nil, err
-	}
-	i := image.FromSource(src)
-	blobs, err := i.BlobDigests()
+	dr, err := transports.ParseImageName(storage.Transport.Name() + ":" + sr.StringWithinTransport())
 	if err != nil {
 		return nil, err
 	}
 
-	dr, err := transports.ParseImageName("oci-storage:" + tr.StringWithinTransport())
-	if err != nil {
-		return nil, err
-	}
-	dest, err := dr.NewImageDestination(s.imageContext)
-	if err != nil {
-		return nil, err
-	}
-	defer dest.Close()
-
-	// copy blobs (layer + config for docker v2s2, layers only for docker v2s1 [the config is in the manifest])
-	for _, b := range blobs {
-		// TODO(runcom,nalin): we need do-then-commit to later purge on error
-		r, s, err := src.GetBlob(b)
-		if err != nil {
-			return nil, err
-		}
-		if _, _, err := dest.PutBlob(r, b, s); err != nil {
-			r.Close()
-			return nil, err
-		}
-		r.Close()
-	}
-
-	// make the destination image persistent
-	err = dest.Commit()
+	policy, err := signature.DefaultPolicy(s.imageContext)
 	if err != nil {
 		return nil, err
 	}
 
-	// copy manifest
-	m, _, err := i.Manifest()
+	pc, err := signature.NewPolicyContext(policy)
 	if err != nil {
-		return nil, err
-	}
-	if err := dest.PutManifest(m); err != nil {
 		return nil, err
 	}
 
-	// copy signatures, if we have any
-	signatures, err := src.GetSignatures()
+	err = ic.Image(s.imageContext, pc, dr, sr, &ic.Options{})
 	if err != nil {
 		return nil, err
-	}
-	if len(signatures) > 0 {
-		if err = dest.PutSignatures(signatures); err != nil {
-			return nil, err
-		}
 	}
 
 	return &pb.PullImageResponse{}, nil
