@@ -36,48 +36,48 @@
 			"Rev": "c5e39a87f702f757a1e98f701d873992bd4d37b1"
 		},
 		{
-			"ImportPath": "github.com/containers/image/directory",
-			"Rev": "0c795ea71fce8641e408312e1628d20b38903fe6"
+			"ImportPath": "github.com/nalind/image/directory",
+			"Rev": "c111f3ed169f1f5db19fc5eddd5c376387ae6491"
 		},
 		{
-			"ImportPath": "github.com/containers/image/directory/explicitfilepath",
-			"Rev": "0c795ea71fce8641e408312e1628d20b38903fe6"
+			"ImportPath": "github.com/nalind/image/directory/explicitfilepath",
+			"Rev": "c111f3ed169f1f5db19fc5eddd5c376387ae6491"
 		},
 		{
-			"ImportPath": "github.com/containers/image/docker",
-			"Rev": "0c795ea71fce8641e408312e1628d20b38903fe6"
+			"ImportPath": "github.com/nalind/image/docker",
+			"Rev": "c111f3ed169f1f5db19fc5eddd5c376387ae6491"
 		},
 		{
-			"ImportPath": "github.com/containers/image/docker/policyconfiguration",
-			"Rev": "0c795ea71fce8641e408312e1628d20b38903fe6"
+			"ImportPath": "github.com/nalind/image/docker/policyconfiguration",
+			"Rev": "c111f3ed169f1f5db19fc5eddd5c376387ae6491"
 		},
 		{
-			"ImportPath": "github.com/containers/image/image",
-			"Rev": "0c795ea71fce8641e408312e1628d20b38903fe6"
+			"ImportPath": "github.com/nalind/image/image",
+			"Rev": "c111f3ed169f1f5db19fc5eddd5c376387ae6491"
 		},
 		{
-			"ImportPath": "github.com/containers/image/manifest",
-			"Rev": "0c795ea71fce8641e408312e1628d20b38903fe6"
+			"ImportPath": "github.com/nalind/image/manifest",
+			"Rev": "c111f3ed169f1f5db19fc5eddd5c376387ae6491"
 		},
 		{
-			"ImportPath": "github.com/containers/image/oci",
-			"Rev": "0c795ea71fce8641e408312e1628d20b38903fe6"
+			"ImportPath": "github.com/nalind/image/oci",
+			"Rev": "c111f3ed169f1f5db19fc5eddd5c376387ae6491"
 		},
 		{
-			"ImportPath": "github.com/containers/image/openshift",
-			"Rev": "0c795ea71fce8641e408312e1628d20b38903fe6"
+			"ImportPath": "github.com/nalind/image/openshift",
+			"Rev": "c111f3ed169f1f5db19fc5eddd5c376387ae6491"
 		},
 		{
-			"ImportPath": "github.com/containers/image/transports",
-			"Rev": "0c795ea71fce8641e408312e1628d20b38903fe6"
+			"ImportPath": "github.com/nalind/image/transports",
+			"Rev": "c111f3ed169f1f5db19fc5eddd5c376387ae6491"
 		},
 		{
-			"ImportPath": "github.com/containers/image/types",
-			"Rev": "0c795ea71fce8641e408312e1628d20b38903fe6"
+			"ImportPath": "github.com/nalind/image/types",
+			"Rev": "c111f3ed169f1f5db19fc5eddd5c376387ae6491"
 		},
 		{
-			"ImportPath": "github.com/containers/image/version",
-			"Rev": "0c795ea71fce8641e408312e1628d20b38903fe6"
+			"ImportPath": "github.com/nalind/image/version",
+			"Rev": "c111f3ed169f1f5db19fc5eddd5c376387ae6491"
 		},
 		{
 			"ImportPath": "github.com/docker/distribution",

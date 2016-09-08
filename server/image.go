@@ -5,10 +5,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/containers/image/directory"
-	"github.com/containers/image/image"
-	"github.com/containers/image/transports"
 	pb "github.com/kubernetes/kubernetes/pkg/kubelet/api/v1alpha1/runtime"
+	"github.com/nalind/image/directory"
+	"github.com/nalind/image/image"
+	"github.com/nalind/image/transports"
 	"golang.org/x/net/context"
 )
 
