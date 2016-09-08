@@ -6,6 +6,8 @@ import (
 	"os"
 
 	"github.com/Sirupsen/logrus"
+	sreexec "github.com/containers/storage/pkg/reexec"
+	dreexec "github.com/docker/docker/pkg/reexec"
 	"github.com/kubernetes/kubernetes/pkg/kubelet/api/v1alpha1/runtime"
 	"github.com/mrunalp/ocid/server"
 	"github.com/urfave/cli"
@@ -17,6 +19,12 @@ const (
 )
 
 func main() {
+	if sreexec.Init() {
+		return
+	}
+	if dreexec.Init() {
+		return
+	}
 	debug := false
 
 	app := cli.NewApp()
