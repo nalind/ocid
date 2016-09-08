@@ -5,6 +5,7 @@ import (
 	"net"
 	"os"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/kubernetes/kubernetes/pkg/kubelet/api/v1alpha1/runtime"
 	"github.com/mrunalp/ocid/server"
 	"github.com/urfave/cli"
@@ -16,6 +17,8 @@ const (
 )
 
 func main() {
+	debug := false
+
 	app := cli.NewApp()
 	app.Name = "ocic"
 	app.Usage = "client for ocid"
@@ -36,9 +39,19 @@ func main() {
 			Value: "/var/lib/ocid/containers",
 			Usage: "ocid container dir",
 		},
+		cli.BoolFlag{
+			Name:        "debug",
+			Destination: &debug,
+			Usage:       "print debugging information",
+		},
 	}
 
 	app.Action = func(c *cli.Context) error {
+		if debug {
+			logrus.SetLevel(logrus.DebugLevel)
+		} else {
+			logrus.SetLevel(logrus.ErrorLevel)
+		}
 		// Remove the socket if it already exists
 		if _, err := os.Stat(unixDomainSocket); err == nil {
 			if err := os.Remove(unixDomainSocket); err != nil {
